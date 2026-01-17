@@ -160,7 +160,7 @@ export const Chatbot: React.FC<Props> = (props) => {
             return {
               ...m,
               content: m.parts
-                ?.map((p) => ("text" in p ? p.text : ""))
+                ?.map((p) => (p && "text" in p ? p.text : ""))
                 .join("\n"),
             };
           });
@@ -379,7 +379,7 @@ export const Chatbot: React.FC<Props> = (props) => {
         {messages.map((message, index) => {
           const textContent = message.parts
             ?.filter((p): p is TextUIPart => p.type === "text")
-            .map((p) => p.text)
+            .map((p) => p?.text)
             .join("\n");
           const isLast = index === messages.length - 1;
 
